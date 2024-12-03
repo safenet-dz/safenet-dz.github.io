@@ -446,20 +446,55 @@
     </button>
     <!-- end of back to top button -->
     	
+     	
     <!-- Scripts -->
     <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyqDjXQgElNFtRK4UqOOuFw25wHdpWS26YpKPslECdBEO9Z26uwGCA45C-5XFBMU2Bv/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxQWxOSXeGoEB6DFbr6-_wgoj8l7gGE7NDsKtmwhkqeez3uRJAqBPcG8UmiW3OosP4i/exec'
 
     const form = document.forms['contact-form']
+    const form_holder = document.getElementById("form_holder")
+    const successMessage = `
+    <div style="
+        text-align: center; 
+        font-size: 1.2em; 
+        color: green; 
+        background-color: #e6ffe6; 
+        border: 2px solid #00cc00; 
+        border-radius: 10px; 
+        padding: 20px; 
+        margin-top: 20px; 
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+        <strong>Merci !</strong> Votre message a été soumis avec succès.
+    </div>
+    `;
+
+    const errorMessage = `
+    <div style="
+        text-align: center; 
+        font-size: 1.2em; 
+        color: red; 
+        background-color: #ffe6e6; 
+        border: 2px solid #ff0000; 
+        border-radius: 10px; 
+        padding: 20px; 
+        margin-top: 20px; 
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+        <strong>Erreur !</strong> Une erreur s'est produite lors de la soumission du formulaire. Veuillez réessayer plus tard.
+    </div>
+    `;
+
 
     form.addEventListener('submit', e => {
     
     e.preventDefault()
     
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-    .then(response => alert("Thank you! Form is submitted" ))
-    .then(() => { window.location.reload(); })
-    .catch(error => console.error('Error!', error.message))
+    .then(response => form_holder.innerHTML = successMessage)
+    
+    .catch(error => {
+            form_holder.innerHTML = errorMessage;
+            console.error('Erreur !', error.message);
+        })
     })
     </script>
 
