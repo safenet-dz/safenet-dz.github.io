@@ -453,6 +453,22 @@
 
     const form = document.forms['contact-form']
     const form_holder = document.getElementById("form_holder")
+    
+    const processing = `
+    <div style="
+        text-align: center; 
+        font-size: 1.2em; 
+        color: #555; 
+        background-color: #f9f9f9; 
+        border: 2px dashed #ccc; 
+        border-radius: 10px; 
+        padding: 20px; 
+        margin-top: 20px; 
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+        <img src="images/processing.gif" alt="Traitement en cours" style="width: 50px; height: 50px; margin-bottom: 10px;">
+    </div>
+    `;
+
     const successMessage = `
     <div style="
         text-align: center; 
@@ -487,6 +503,8 @@
     form.addEventListener('submit', e => {
     
     e.preventDefault()
+
+    form_holder.innerHTML = processing;
     
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
     .then(response => form_holder.innerHTML = successMessage)
