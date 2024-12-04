@@ -500,6 +500,7 @@
     e.preventDefault()
 
     form_holder.innerHTML = processing;
+    document.getElementById("contact").scrollIntoView();
     
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
     .then(response => form_holder.innerHTML = successMessage)
